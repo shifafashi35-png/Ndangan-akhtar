@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasyakuran Khitan Akhtar</title>
+
+<!-- FONT LUCU -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Baloo 2', cursive;
+  background: linear-gradient(to bottom, #cfefff, #f4fbff);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 25px 18px;
+}
+
+h1 {
+  color: #0466c8;
+  font-size: 28px;
+}
+
+h2 {
+  color: #0353a4;
+}
+
+img {
+  width: 180px;
+  border-radius: 25px;
+  margin: 15px 0;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+p {
+  color: #023047;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+button, .btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #74c0fc;
+  border: none;
+  border-radius: 30px;
+  color: #023047;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 8px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+button:hover, .btn:hover {
+  background: #4dabf7;
+  color: white;
+}
+
+#isi {
+  display: none;
+  animation: fadeIn 1.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Awan */
+.awan {
+  position: fixed;
+  top: 20px;
+  width: 120px;
+  height: 60px;
+  background: white;
+  border-radius: 50px;
+  opacity: 0.8;
+  animation: geser 30s linear infinite;
+}
+@keyframes geser {
+  from {left: -150px;}
+  to {left: 110%;}
+}
+
+/* Bintang */
+.bintang {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: kelip 2s infinite alternate;
+}
+@keyframes kelip {
+  from {opacity: 0.3;}
+  to {opacity: 1;}
+}
+
+.countdown {
+  font-size: 20px;
+  color: #0353a4;
+  margin: 15px 0;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🌙🕌 Tasyakuran Khitan 🕌🌙</h1>
+  <h2>✨ Muhammad Akhtar Azhari ✨</h2>
+
+  <button onclick="buka()">💙 Buka Undangan 💙</button>
+
+  <div id="isi">
+
+    <img src="anak.png" alt="Foto Akhtar">
+
+    <p>
+      Assalamu’alaikum om tanteee 🤗<br><br>
+      Halo… aku <b>Akhtar</b> 👦💙<br>
+      Alhamdulillah aku <b>sudah sunat</b> 😆✨<br>
+      Kata Ayah & Ibu ini sunnah Rasulullah ﷺ<br>
+      biar aku jadi anak sholeh 🤲
+    </p>
+
+    <div class="countdown" id="countdown"></div>
+
+    <p>
+      📍 <b>Alamat</b><br>
+      Kp. Cirumput RT 05 RW 04<br>
+      Desa Selaawi<br>
+      Kecamatan Sukaraja
+    </p>
+
+    <a class="btn" href="https://maps.app.goo.gl/hiyCgzybPQXN6SH17" target="_blank">
+      📍 Lihat Lokasi
+    </a>
+
+    <a class="btn" href="https://wa.me/6283807093186" target="_blank">
+      📲 Konfirmasi Kehadiran
+    </a>
+
+    <p>
+      Dateng yaaa 🤍<br>
+      Doain aku biar cepet sembuh<br>
+      jadi anak pinter & sholeh 😇✨
+    </p>
+
+  </div>
+</div>
+
+<!-- MUSIK -->
+<audio id="musik" loop>
+  <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function buka() {
+  document.getElementById("isi").style.display = "block";
+  document.getElementById("musik").play();
+  awan();
+  bintang();
+  hitung();
+}
+
+function awan() {
+  for (let i = 0; i < 3; i++) {
+    let a = document.createElement("div");
+    a.className = "awan";
+    a.style.top = (20 + i * 60) + "px";
+    a.style.animationDuration = (25 + i * 10) + "s";
+    document.body.appendChild(a);
+  }
+}
+
+function bintang() {
+  for (let i = 0; i < 25; i++) {
+    let b = document.createElement("div");
+    b.className = "bintang";
+    b.style.top = Math.random() * window.innerHeight + "px";
+    b.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(b);
+  }
+}
+
+// COUNTDOWN (REAL-TIME)
+const tanggalAcara = new Date("2026-02-15T08:00:00").getTime();
+
+function hitung() {
+  setInterval(() => {
+    const sekarang = new Date().getTime();
+    const sisa = tanggalAcara - sekarang;
+
+    if (sisa <= 0) {
+      document.getElementById("countdown").innerHTML =
+        "🎉 Alhamdulillah, acaranya hari ini!";
+      return;
+    }
+
+    const hari  = Math.floor(sisa / (1000 * 60 * 60 * 24));
+    const jam   = Math.floor((sisa % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const menit = Math.floor((sisa % (1000 * 60 * 60)) / (1000 * 60));
+    const detik = Math.floor((sisa % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+      `⏳ ${hari} hari ${jam} jam ${menit} menit ${detik} detik lagi`;
+  }, 1000);
+}
+
+</script>
+
+</body>
+</html>
